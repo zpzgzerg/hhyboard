@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/hhy
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+
+  security:
+    user:
+      name: user
+      password: 1111
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+paging:
+  block-per-page: 5

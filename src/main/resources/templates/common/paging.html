@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <nav aria-label="Paging" th:fragment="paging">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:if="${paging.isPrev == true}">
+                <a class="page-link" href="#" th:href="@{''(page=${paging.prevPage})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:class="${paging.currentPage == num ? 'page-item active' : 'page-item'}" th:each="num : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                <a class="page-link" th:if="${paging.currentPage == num}" th:text="${num+1}"></a>
+                <a class="page-link" th:unless="${paging.currentPage == num}" href="#" th:href="@{''(page=${num})}" th:text="${num+1}"></a>
+            </li>
+            <li class="page-item" th:if="${paging.isNext == true}">
+                <a class="page-link" href="#" th:href="@{''(page=${paging.nextPage})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</html>
