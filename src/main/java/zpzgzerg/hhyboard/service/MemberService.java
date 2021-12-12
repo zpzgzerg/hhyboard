@@ -20,7 +20,7 @@ public class MemberService {
 
     @Transactional
     public void init(String password) {
-        for (int i = 1; i <= 105; i++) {
+        for (int i = 1; i <= 2; i++) {
             memberRepository.save(new Member(RoleType.ROLE_ADMIN, "userId" + i, password, "userName" + i, 0));
         }
     }

@@ -1,10 +1,25 @@
 spring:
+  profiles:
+    active: local
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+
+paging:
+  block-per-page: 5
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
   datasource:
     url: jdbc:h2:tcp://localhost/~/hhy
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
   jpa:
     hibernate:
       ddl-auto: create
@@ -12,20 +27,66 @@ spring:
       hibernate:
 #        show_sql: true
         format_sql: true
-
   security:
     user:
       name: user
       password: 1111
 
-  data:
-    web:
-      pageable:
-        default-page-size: 10
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://hhy_db:3306/hhy?useSSL=false
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  security:
+    user:
+      name: user
+      password: 1111
 
 logging:
   level:
     org.hibernate.SQL: debug
 
-paging:
-  block-per-page: 5
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://hhy_db:3306/hhy?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&validationQuery="select 1"
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  security:
+    user:
+      name: user
+      password: 1111
+
+logging:
+  level:
+    org.hibernate.SQL: info

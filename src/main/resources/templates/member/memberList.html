@@ -1,8 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/layout/header::header" />
+<head th:replace="layout/header::header" />
 <body>
-<div th:replace="/layout/top::top"/>
+<div th:replace="layout/top::top"/>
 <div class="container">
     <div class="mb-3">
         <div class="float-start" th:text="'회원수 : ' + ${paging.totalCount} + ' 명'"></div>
@@ -33,8 +33,8 @@
             </tr>
         </tbody>
     </table>
-    <nav th:replace="/common/paging::paging"/>
+    <nav th:replace="common/paging::paging"/>
 </div>
-<div th:replace="/layout/footer::footer"/>
+<div th:replace="layout/footer::footer"/>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/layout/header::header" />
+<head th:replace="layout/header::header" />
 <style>
     .field-error {
         border-color: #dc3545;
@@ -8,7 +8,7 @@
     }
 </style>
 <body>
-<div th:replace="/layout/top::top"/>
+<div th:replace="layout/top::top"/>
 <div class="container" style="max-width: 560px;">
     <form action="#" th:action="@{/member/save}" th:object="${memberForm}" method="post">
         <div class="mb-3">
@@ -42,6 +42,6 @@
         </div>
     </form>
 </div>
-<div th:replace="/layout/footer::footer"/>
+<div th:replace="layout/footer::footer"/>
 </body>
 </html>
