@@ -1,36 +1,23 @@
 version: "3"
 services:
-  mysql:
-    container_name: hhy_db
-    build:
-      context: ./mysql
-      dockerfile: Dockerfile
-    environment:
-      MYSQL_DATABASE: hhy
-      MYSQL_ROOT_PASSWORD: password
-    ports:
-      - 3306:3306
-    restart: always
-    volumes:
-      - ~/docker_db/mysql:/var/lib/mysql
-    networks:
-      - hhy_net
   spring :
     container_name: hhy_was
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: zpzgzerg/docker_hhy
     expose:
       - 8080
     depends_on:
       - mysql
     networks:
       - hhy_net
+    environment:
+      MYSQL_HOST: $MYSQL_HOST
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_PORT: $MYSQL_PORT
   nginx:
     container_name: hhy_web
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    image: zpzgzerg/docker-hhy-nginx
     ports:
       - 80:80
     volumes:

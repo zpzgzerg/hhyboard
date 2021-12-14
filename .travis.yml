@@ -1,0 +1,26 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+after_success:
+  - docker build -t zpzgzerg/docker-hhy .
+  - docker build -t zpzgzerg/docker-hhy-nginx ./nginx
+    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push zpzgzerg/docker-hhy
+  - docker push zpzgzerg/docker-hhy-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-northeast-2
+  app: docker-hhy
+  env: Dockerhhy-env
+  bucket_name: elasticbeanstalk-ap-northeast-2-262840429927
+  bucket_path: docker-hhy
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
