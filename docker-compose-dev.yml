@@ -26,6 +26,8 @@ services:
       - mysql
     networks:
       - hhy_net
+    environment:
+      PROFILE: dev
   nginx:
     container_name: hhy_web
     build:

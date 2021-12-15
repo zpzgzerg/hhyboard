@@ -5,8 +5,6 @@ services:
     image: zpzgzerg/docker_hhy
     expose:
       - 8080
-    depends_on:
-      - mysql
     networks:
       - hhy_net
     environment:
@@ -15,13 +13,12 @@ services:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_PORT: $MYSQL_PORT
+      PROFILE: prod
   nginx:
     container_name: hhy_web
     image: zpzgzerg/docker-hhy-nginx
     ports:
       - 80:80
-    volumes:
-      - ~/docker_web/nginx/log/:/var/log/nginx/
     restart: always
     networks:
       - hhy_net
