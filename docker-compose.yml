@@ -2,7 +2,7 @@ version: "3"
 services:
   spring :
     container_name: hhy_was
-    image: zpzgzerg/docker_hhy
+    image: zpzgzerg/docker-hhy:latest
     expose:
       - 8080
     networks:
@@ -16,7 +16,7 @@ services:
       PROFILE: prod
   nginx:
     container_name: hhy_web
-    image: zpzgzerg/docker-hhy-nginx
+    image: zpzgzerg/docker-hhy-nginx:latest
     ports:
       - 80:80
     restart: always
