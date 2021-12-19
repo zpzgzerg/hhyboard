@@ -16,17 +16,15 @@
                 <th>아이디</th>
                 <th>이름</th>
                 <th class="col-2">등록일시</th>
-                <th>포인트</th>
             </tr>
         </thead>
         <tbody class="text-center">
             <tr th:each="member : ${members}">
                 <th th:text="${member.id}">1</th>
                 <td th:text="${member.roleType.roleName}">관리자</td>
-                <td th:text="${member.userId}">아이디</td>
+                <td><a href="#" th:href="@{/member/detail/{id}(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
                 <td th:text="${member.userName}">이름</td>
                 <td th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>
-                <td th:text="${member.point}">포인트</td>
             </tr>
             <tr th:if="${members.size() == 0}">
                 <td colspan="6">등록 된 회원이 없습니다.</td>

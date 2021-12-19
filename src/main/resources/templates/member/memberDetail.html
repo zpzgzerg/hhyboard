@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/header::header" />
+<body>
+<div th:replace="layout/top::top"/>
+
+<div class="container" style="max-width: 560px;">
+    <div class="row mb-3">
+        <div class="col-md-2">아이디</div>
+        <div class="col-md-10" th:text="${member.userId}">아이디</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">이름</div>
+        <div class="col-md-10" th:text="${member.userName}">이름</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">권한</div>
+        <div class="col-md-10" th:text="${member.roleType.roleName}">권한</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">등록일시</div>
+        <div class="col-md-10" th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">포인트</div>
+        <div class="col-md-10" th:text="${member.point}">포인트</div>
+    </div>
+    <div class="clearfix">
+        <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
+        <a href="#" th:href="@{/member/edit/{id}(id=${member.id})}" class="btn btn-primary float-end" role="button">수정</a>
+    </div>
+</div>
+
+<div th:replace="layout/footer::footer"/>
+</body>
+</html>

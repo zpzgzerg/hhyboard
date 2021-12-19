@@ -80,4 +80,13 @@ public class MemberController {
 
         return "redirect:/members";
     }
+
+    @GetMapping("/member/detail/{memberId}")
+    public String detail(@PathVariable long memberId, Model model) {
+
+        Optional<Member> member = memberService.findMember(memberId);
+        model.addAttribute("member", member.get());
+
+        return "member/memberDetail";
+    }
 }
