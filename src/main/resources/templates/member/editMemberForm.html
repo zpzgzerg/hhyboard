@@ -10,17 +10,7 @@
 <body>
 <div th:replace="layout/top::top"/>
 <div class="container" style="max-width: 560px;">
-    <form action="#" th:action="@{/member/save}" th:object="${memberForm}" method="post">
-        <div class="mb-3">
-            <label th:for="userId">ID</label>
-            <input type="text" th:field="*{userId}" placeholder="아이디" class="form-control" th:errorclass="field-error">
-            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</p>
-        </div>
-        <div class="mb-3">
-            <label th:for="password">PASSWORD</label>
-            <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" th:errorclass="field-error">
-            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</p>
-        </div>
+    <form th:object="${memberForm}" method="post">
         <div class="mb-3">
             <label th:for="userName">이름</label>
             <input type="text" th:field="*{userName}" placeholder="이름" class="form-control" th:errorclass="field-error">
@@ -38,7 +28,7 @@
         </div>
         <div class="clearfix">
             <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
-            <button type="submit" class="btn btn-primary float-end">등록</button>
+            <button type="submit" class="btn btn-primary float-end">수정</button>
         </div>
     </form>
 </div>

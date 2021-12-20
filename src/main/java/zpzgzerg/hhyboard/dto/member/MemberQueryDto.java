@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.dto;
+package zpzgzerg.hhyboard.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;

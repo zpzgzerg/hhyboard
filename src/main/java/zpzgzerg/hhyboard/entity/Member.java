@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import zpzgzerg.hhyboard.form.member.MemberForm;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,7 +50,12 @@ public class Member {
         this.point = point;
     }
 
-    private void changePassword(String password) {
+    public void changePassword(String password) {
         this.password = password;
+    }
+
+    public void updateMember(MemberForm form) {
+        this.userName = form.getUserName();
+        this.roleType = form.getRoleType();
     }
 }

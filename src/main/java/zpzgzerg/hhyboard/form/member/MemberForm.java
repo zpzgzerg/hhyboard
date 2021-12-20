@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.form;
+package zpzgzerg.hhyboard.form.member;
 
 import lombok.Getter;
 import lombok.Setter;
