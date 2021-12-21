@@ -7,15 +7,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import zpzgzerg.hhyboard.entity.Member;
+import zpzgzerg.hhyboard.form.SaveCheck;
+import zpzgzerg.hhyboard.form.UpdateCheck;
 import zpzgzerg.hhyboard.form.member.MemberForm;
 import zpzgzerg.hhyboard.mapper.MemberMapper;
 import zpzgzerg.hhyboard.service.MemberService;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -45,23 +48,26 @@ public class MemberController {
         return "member/memberList";
     }
 
-    @GetMapping("/member/{member_id}/edit")
-    public String updateMemberForm(@PathVariable Long member_id, Model model) {
-        Optional<Member> member = memberService.findMember(member_id);
+    @GetMapping("/members/{id}/detail")
+    public String detail(@PathVariable long id, Model model) {
+
+        Optional<Member> member = memberService.findMember(id);
         model.addAttribute("member", member.get());
-        return "member/updateMemberForm";
+
+        return "member/memberDetail";
     }
 
-    @GetMapping("/member/save")
+    @GetMapping("/members/save")
     public String saveMemberForm(Model model) {
-        model.addAttribute("memberForm", new MemberForm());
+        model.addAttribute("form", new MemberForm());
         return "member/saveMemberForm";
     }
 
-    @PostMapping("/member/save")
-    public String saveMember(@Valid MemberForm form, BindingResult result) {
+    @PostMapping("/members/save")
+    public String saveMember(@Validated(SaveCheck.class) @ModelAttribute("form") MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
+            log.error("Valid error : {}", result.getFieldError());
             return "member/saveMemberForm";
         }
 
@@ -74,16 +80,7 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    @GetMapping("/member/detail/{id}")
-    public String detail(@PathVariable long id, Model model) {
-
-        Optional<Member> member = memberService.findMember(id);
-        model.addAttribute("member", member.get());
-
-        return "member/memberDetail";
-    }
-
-    @GetMapping("/member/edit/{id}")
+    @GetMapping("/members/{id}/edit")
     public String editMemberForm(@PathVariable long id, Model model) {
 
         Optional<Member> member = memberService.findMember(id);
@@ -91,21 +88,22 @@ public class MemberController {
         MemberForm memberForm = memberMapper.memberToForm(member.get());
         log.info("convert Form  = {}", memberForm);
 
-        model.addAttribute("memberForm", memberForm);
+        model.addAttribute("form", memberForm);
 
         return "member/editMemberForm";
 
     }
 
-    @PostMapping("/member/edit/{id}")
-    public String editMember(@PathVariable long id, @Valid MemberForm form, BindingResult result) {
+    @PostMapping("/members/{id}/edit")
+    public String editMember(@PathVariable long id, @Validated(UpdateCheck.class) @ModelAttribute("form") MemberForm form, BindingResult result) {
 
         if(result.hasErrors()) {
+            log.error("Valid error : {}", result.getFieldError());
             return "member/editMemberForm";
         }
 
-        memberService.editMember(id, form);
+        memberService.editMember(form);
 
-        return "redirect:/member/edit/"+id;
+        return "redirect:/members/"+form.getMemberId()+"/detail";
     }
 }

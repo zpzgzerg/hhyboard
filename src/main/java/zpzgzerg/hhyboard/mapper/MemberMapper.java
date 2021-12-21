@@ -12,6 +12,7 @@ public interface MemberMapper {
     @Mapping(source = "password", target="password", qualifiedBy = EncodeMapping.class)
     Member formToMember(MemberForm form);
 
+    @Mapping(source = "id", target = "memberId")
     MemberForm memberToForm(Member member);
 
 }

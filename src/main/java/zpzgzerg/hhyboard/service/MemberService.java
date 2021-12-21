@@ -3,13 +3,11 @@ package zpzgzerg.hhyboard.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zpzgzerg.hhyboard.entity.Member;
 import zpzgzerg.hhyboard.entity.RoleType;
 import zpzgzerg.hhyboard.form.member.MemberForm;
-import zpzgzerg.hhyboard.mapper.MemberMapper;
 import zpzgzerg.hhyboard.repository.MemberRepository;
 
 import java.util.Optional;
@@ -52,19 +50,17 @@ public class MemberService {
      */
     @Transactional
     public Long saveMember(Member member) {
-
         memberRepository.save(member);
         return member.getId();
     }
 
     /**
      * 회원 수정
-     * @param id
      * @param form
      */
     @Transactional
-    public void editMember(Long id, MemberForm form) {
-        Member member = memberRepository.findById(id).get();
+    public void editMember(MemberForm form) {
+        Member member = memberRepository.findById(form.getMemberId()).get();
         member.updateMember(form);
     }
 }

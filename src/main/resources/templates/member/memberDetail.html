@@ -27,7 +27,7 @@
     </div>
     <div class="clearfix">
         <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
-        <a href="#" th:href="@{/member/edit/{id}(id=${member.id})}" class="btn btn-primary float-end" role="button">수정</a>
+        <a href="#" th:href="@{/members/{id}/edit(id=${member.id})}" class="btn btn-primary float-end" role="button">수정</a>
     </div>
 </div>
 

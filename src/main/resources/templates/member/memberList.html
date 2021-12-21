@@ -6,7 +6,7 @@
 <div class="container">
     <div class="mb-3">
         <div class="float-start" th:text="'회원수 : ' + ${paging.totalCount} + ' 명'"></div>
-        <a href="#" th:href="@{/member/save}" class="btn btn-primary float-end" role="button">회원등록</a>
+        <a href="#" th:href="@{/members/save}" class="btn btn-primary float-end" role="button">회원등록</a>
     </div>
     <table class="table">
         <thead class="text-center">
@@ -22,7 +22,7 @@
             <tr th:each="member : ${members}">
                 <th th:text="${member.id}">1</th>
                 <td th:text="${member.roleType.roleName}">관리자</td>
-                <td><a href="#" th:href="@{/member/detail/{id}(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
+                <td><a href="#" th:href="@{/members/{id}/detail(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
                 <td th:text="${member.userName}">이름</td>
                 <td th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>
             </tr>

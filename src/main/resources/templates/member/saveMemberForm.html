@@ -10,7 +10,7 @@
 <body>
 <div th:replace="layout/top::top"/>
 <div class="container" style="max-width: 560px;">
-    <form action="#" th:action="@{/member/save}" th:object="${memberForm}" method="post">
+    <form action="#" th:action="@{/members/save}" th:object="${form}" method="post">
         <div class="mb-3">
             <label th:for="userId">ID</label>
             <input type="text" th:field="*{userId}" placeholder="아이디" class="form-control" th:errorclass="field-error">
