@@ -4,6 +4,20 @@
 <body>
 <div th:replace="layout/top::top"/>
 <div class="container">
+    <form th:action="@{/members/search}" th:object="${search}" method="post">
+    <div class="mb-3">
+        <label class="form-label">검색모듈</label>
+        <button type="submit" class="btn btn-primary float-end">검색</button>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text">아이디</span>
+            <input type="text" class="form-control" th:field="*{userId}" placeholder="아이디">
+            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</p>
+            <span class="input-group-text">이름</span>
+            <input type="text" class="form-control" th:field="*{userName}" placeholder="이름">
+            <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
+        </div>
+    </div>
+    </form>
     <div class="mb-3">
         <div class="float-start" th:text="'회원수 : ' + ${paging.totalCount} + ' 명'"></div>
         <a href="#" th:href="@{/members/save}" class="btn btn-primary float-end" role="button">회원등록</a>

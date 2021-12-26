@@ -1,14 +1,16 @@
-package zpzgzerg.hhyboard.service;
+package zpzgzerg.hhyboard.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zpzgzerg.hhyboard.dto.member.MemberQueryDto;
+import zpzgzerg.hhyboard.dto.member.MemberSearchDto;
 import zpzgzerg.hhyboard.entity.Member;
 import zpzgzerg.hhyboard.entity.RoleType;
 import zpzgzerg.hhyboard.form.member.MemberForm;
-import zpzgzerg.hhyboard.repository.MemberRepository;
+import zpzgzerg.hhyboard.repository.member.MemberRepository;
 
 import java.util.Optional;
 
@@ -32,6 +34,16 @@ public class MemberService {
      */
     public Page<Member> findMembers(Pageable pageable) {
         return memberRepository.findAll(pageable);
+    }
+
+    /**
+     * 회원 목록 검색 (임시)
+     * @param memberSearchDto
+     * @param pageable
+     * @return
+     */
+    public Page<MemberQueryDto> findMembersSearch(MemberSearchDto memberSearchDto, Pageable pageable) {
+        return memberRepository.search(memberSearchDto, pageable);
     }
 
     /**

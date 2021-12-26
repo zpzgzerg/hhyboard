@@ -20,8 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
 
     @GetMapping(value = {"/login", "/loginError"})
-    public String login(@ModelAttribute("login") LoginDto loginDto, Model model) {
+    public String login(@ModelAttribute("login") LoginDto loginDto, Model model, HttpServletRequest req) {
 
+        log.info("getRequestURI = {}", req.getRequestURI());
         log.info("loginError = {}", loginDto.isError());
         log.info("loginErrorMessage = {}", loginDto.getErrorMessage());
 

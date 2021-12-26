@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import zpzgzerg.hhyboard.entity.Member;
-import zpzgzerg.hhyboard.repository.MemberRepository;
+import zpzgzerg.hhyboard.repository.member.MemberRepository;
 
 import java.util.ArrayList;
 import java.util.List;

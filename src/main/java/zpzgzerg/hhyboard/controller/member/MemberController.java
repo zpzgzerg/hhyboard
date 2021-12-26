@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.controller;
+package zpzgzerg.hhyboard.controller.member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,16 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import zpzgzerg.hhyboard.controller.Paging;
+import zpzgzerg.hhyboard.dto.member.MemberQueryDto;
+import zpzgzerg.hhyboard.dto.member.MemberSearchDto;
 import zpzgzerg.hhyboard.entity.Member;
 import zpzgzerg.hhyboard.form.SaveCheck;
 import zpzgzerg.hhyboard.form.UpdateCheck;
 import zpzgzerg.hhyboard.form.member.MemberForm;
 import zpzgzerg.hhyboard.mapper.MemberMapper;
-import zpzgzerg.hhyboard.service.MemberService;
+import zpzgzerg.hhyboard.service.member.MemberService;
 
 import java.util.Optional;
 
@@ -35,12 +35,34 @@ public class MemberController {
         memberService.init(passwordEncoder.encode("asdfqwer12"));
     }*/
 
-    @GetMapping("/members")
-    public String list(Model model, Pageable pageable) {
+//    @GetMapping("/members")
+//    public String list(Model model, Pageable pageable) {
+//
+//        Page<Member> members = memberService.findMembers(pageable);
+//
+//        model.addAttribute("members", members.getContent());
+//        model.addAttribute("search", new MemberSearchDto());
+//
+//        // 페이징 로직 처리
+//        model.addAttribute("paging", paging.process(members.getNumber(), members.getTotalPages(), members.getTotalElements()));
+//
+//        return "member/memberList";
+//    }
 
-        Page<Member> members = memberService.findMembers(pageable);
+    @RequestMapping("/members")
+    public String search(@ModelAttribute("search") MemberSearchDto searchDto, Model model, Pageable pageable, BindingResult result) {
+
+        if (result.hasErrors()) {
+            log.error("search vaild error : {}", result.getFieldError());
+            return "member/memberList";
+        }
+
+        log.error("searchDto : {}", searchDto);
+
+        Page<MemberQueryDto> members = memberService.findMembersSearch(searchDto, pageable);
 
         model.addAttribute("members", members.getContent());
+        model.addAttribute("search", searchDto);
 
         // 페이징 로직 처리
         model.addAttribute("paging", paging.process(members.getNumber(), members.getTotalPages(), members.getTotalElements()));
