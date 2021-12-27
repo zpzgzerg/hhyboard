@@ -4,7 +4,7 @@
 <body>
 <div th:replace="layout/top::top"/>
 <div class="container">
-    <form th:action="@{/members/search}" th:object="${search}" method="post">
+    <form th:action="@{/members}" th:object="${search}" method="post">
     <div class="mb-3">
         <label class="form-label">검색모듈</label>
         <button type="submit" class="btn btn-primary float-end">검색</button>

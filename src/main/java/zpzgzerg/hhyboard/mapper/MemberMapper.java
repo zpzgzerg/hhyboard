@@ -10,6 +10,9 @@ import zpzgzerg.hhyboard.mapper.annotation.EncodeMapping;
 public interface MemberMapper {
 
     @Mapping(source = "password", target="password", qualifiedBy = EncodeMapping.class)
+    @Mapping(target = "boards", ignore = true)
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "points", ignore = true)
     Member formToMember(MemberForm form);
 
     @Mapping(source = "id", target = "memberId")

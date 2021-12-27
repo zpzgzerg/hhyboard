@@ -22,7 +22,7 @@ HhyboardApplication 실행 (프로필을 기본이 local 임)
 - https://www.docker.com/get-started
 - 실행 방법
 ```
-docker-compose build 
+docker-compose -f docker-compose-dev.yml build 
 docker-compose -f docker-compose-dev.yml up
 ```
 - http://localhost 접속 (nginx가 프록시 처리를 하고 있어 8080 안붙여도 됨)
