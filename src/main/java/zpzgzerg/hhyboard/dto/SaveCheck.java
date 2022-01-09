@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.form;
+package zpzgzerg.hhyboard.dto;
 
 public interface SaveCheck {
 }

@@ -10,10 +10,10 @@
         <button type="submit" class="btn btn-primary float-end">검색</button>
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text">아이디</span>
-            <input type="text" class="form-control" th:field="*{userId}" placeholder="아이디">
+            <input type="text" class="form-control" th:field="*{userId}" placeholder="검색을 원하시면 아이디를 입력해주세요.">
             <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</p>
             <span class="input-group-text">이름</span>
-            <input type="text" class="form-control" th:field="*{userName}" placeholder="이름">
+            <input type="text" class="form-control" th:field="*{userName}" placeholder="검색을 원하시면 이름을 입력해주세요.">
             <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
         </div>
     </div>
@@ -34,8 +34,8 @@
         </thead>
         <tbody class="text-center">
             <tr th:each="member : ${members}">
-                <th th:text="${member.id}">1</th>
-                <td th:text="${member.roleType.roleName}">관리자</td>
+                <th th:text="${member.id}">No</th>
+                <td th:text="${member.roleType.roleName}">권한</td>
                 <td><a href="#" th:href="@{/members/{id}/detail(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
                 <td th:text="${member.userName}">이름</td>
                 <td th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>

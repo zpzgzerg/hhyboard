@@ -1,16 +1,16 @@
-package zpzgzerg.hhyboard.security.service;
+package zpzgzerg.hhyboard.service.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import zpzgzerg.hhyboard.entity.Member;
 import zpzgzerg.hhyboard.repository.member.MemberRepository;
+import zpzgzerg.hhyboard.security.config.CustomUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         log.info("role : {} ", member.getRoleType().name());
 
-        return new User(member.getUserId(), member.getPassword(), roles);
+        return new CustomUser(roles, member.getUserId(), member.getPassword(), member);
     }
 }

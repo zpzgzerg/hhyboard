@@ -1,10 +1,10 @@
-package zpzgzerg.hhyboard.mapper;
+package zpzgzerg.hhyboard.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import zpzgzerg.hhyboard.entity.Member;
-import zpzgzerg.hhyboard.form.member.MemberForm;
-import zpzgzerg.hhyboard.mapper.annotation.EncodeMapping;
+import zpzgzerg.hhyboard.dto.member.MemberForm;
+import zpzgzerg.hhyboard.dto.mapper.annotation.EncodeMapping;
 
 @Mapper(componentModel = "spring", uses = PasswordEncoderMapper.class)
 public interface MemberMapper {

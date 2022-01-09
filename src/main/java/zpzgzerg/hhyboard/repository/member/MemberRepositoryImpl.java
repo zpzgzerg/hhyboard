@@ -26,7 +26,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     }
 
     @Override
-    public Page<MemberQueryDto> search(MemberSearchDto memberSearchDto, Pageable pageable) {
+    public Page<MemberQueryDto> findMembers(MemberSearchDto memberSearchDto, Pageable pageable) {
 
         List<MemberQueryDto> content = queryFactory
                 .select(new QMemberQueryDto(

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import zpzgzerg.hhyboard.form.member.MemberForm;
+import zpzgzerg.hhyboard.dto.member.MemberForm;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

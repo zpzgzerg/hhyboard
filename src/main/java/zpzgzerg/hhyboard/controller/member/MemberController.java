@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import zpzgzerg.hhyboard.controller.Paging;
+import zpzgzerg.hhyboard.service.comm.Paging;
 import zpzgzerg.hhyboard.dto.member.MemberQueryDto;
 import zpzgzerg.hhyboard.dto.member.MemberSearchDto;
 import zpzgzerg.hhyboard.entity.Member;
-import zpzgzerg.hhyboard.form.SaveCheck;
-import zpzgzerg.hhyboard.form.UpdateCheck;
-import zpzgzerg.hhyboard.form.member.MemberForm;
-import zpzgzerg.hhyboard.mapper.MemberMapper;
+import zpzgzerg.hhyboard.dto.SaveCheck;
+import zpzgzerg.hhyboard.dto.UpdateCheck;
+import zpzgzerg.hhyboard.dto.member.MemberForm;
+import zpzgzerg.hhyboard.dto.mapper.MemberMapper;
 import zpzgzerg.hhyboard.service.member.MemberService;
 
 import java.util.Optional;
@@ -30,39 +30,21 @@ public class MemberController {
     private final MemberMapper memberMapper;
     private final Paging paging;
 
-    /*@PostConstruct
-    public void init() {
-        memberService.init(passwordEncoder.encode("asdfqwer12"));
-    }*/
-
-//    @GetMapping("/members")
-//    public String list(Model model, Pageable pageable) {
-//
-//        Page<Member> members = memberService.findMembers(pageable);
-//
-//        model.addAttribute("members", members.getContent());
-//        model.addAttribute("search", new MemberSearchDto());
-//
-//        // 페이징 로직 처리
-//        model.addAttribute("paging", paging.process(members.getNumber(), members.getTotalPages(), members.getTotalElements()));
-//
-//        return "member/memberList";
-//    }
-
+    /**
+     * 회원 목록
+     */
     @RequestMapping("/members")
-    public String search(@ModelAttribute("search") MemberSearchDto searchDto, Model model, Pageable pageable, BindingResult result) {
+    public String list(@Validated @ModelAttribute("search") MemberSearchDto memberSearchDto, Model model, Pageable pageable, BindingResult result) {
 
         if (result.hasErrors()) {
-            log.error("search vaild error : {}", result.getFieldError());
+            log.error("Search Valid Error : {}", result.getFieldError());
             return "member/memberList";
         }
 
-        log.error("searchDto : {}", searchDto);
-
-        Page<MemberQueryDto> members = memberService.findMembersSearch(searchDto, pageable);
+        Page<MemberQueryDto> members = memberService.findMembers(memberSearchDto, pageable);
 
         model.addAttribute("members", members.getContent());
-        model.addAttribute("search", searchDto);
+        model.addAttribute("search", memberSearchDto);
 
         // 페이징 로직 처리
         model.addAttribute("paging", paging.process(members.getNumber(), members.getTotalPages(), members.getTotalElements()));
@@ -70,6 +52,9 @@ public class MemberController {
         return "member/memberList";
     }
 
+    /**
+     * 회원 상세
+     */
     @GetMapping("/members/{id}/detail")
     public String detail(@PathVariable long id, Model model) {
 
@@ -79,29 +64,41 @@ public class MemberController {
         return "member/memberDetail";
     }
 
+    /**
+     * 회원 등록 폼
+     */
     @GetMapping("/members/save")
     public String saveMemberForm(Model model) {
         model.addAttribute("form", new MemberForm());
         return "member/saveMemberForm";
     }
 
+    /**
+     * 회원 등록 처리
+     */
     @PostMapping("/members/save")
     public String saveMember(@Validated(SaveCheck.class) @ModelAttribute("form") MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
-            log.error("Valid error : {}", result.getFieldError());
+            log.error("Save Valid Error : {}", result.getFieldError());
             return "member/saveMemberForm";
         }
 
         log.info("Request Form  = {}", form);
         Member member = memberMapper.formToMember(form);
-        log.info("convert Entity  = {}", member);
+        log.info("convert Member  = {}", member);
 
         memberService.saveMember(member);
 
         return "redirect:/members";
     }
 
+    /**
+     * 회원 수정 폼
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/members/{id}/edit")
     public String editMemberForm(@PathVariable long id, Model model) {
 
@@ -116,11 +113,14 @@ public class MemberController {
 
     }
 
+    /**
+     * 회원 수정 처리
+     */
     @PostMapping("/members/{id}/edit")
     public String editMember(@PathVariable long id, @Validated(UpdateCheck.class) @ModelAttribute("form") MemberForm form, BindingResult result) {
 
         if(result.hasErrors()) {
-            log.error("Valid error : {}", result.getFieldError());
+            log.error("Edit Valid Error : {}", result.getFieldError());
             return "member/editMemberForm";
         }
 

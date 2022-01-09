@@ -1,9 +1,9 @@
-package zpzgzerg.hhyboard.mapper;
+package zpzgzerg.hhyboard.dto.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import zpzgzerg.hhyboard.mapper.annotation.EncodeMapping;
+import zpzgzerg.hhyboard.dto.mapper.annotation.EncodeMapping;
 
 @Component
 @RequiredArgsConstructor

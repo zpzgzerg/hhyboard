@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.mapper.annotation;
+package zpzgzerg.hhyboard.dto.mapper.annotation;
 
 import org.mapstruct.Qualifier;
 

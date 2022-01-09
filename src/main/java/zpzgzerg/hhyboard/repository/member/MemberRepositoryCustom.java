@@ -6,5 +6,5 @@ import zpzgzerg.hhyboard.dto.member.MemberQueryDto;
 import zpzgzerg.hhyboard.dto.member.MemberSearchDto;
 
 public interface MemberRepositoryCustom {
-    Page<MemberQueryDto> search(MemberSearchDto memberSearchDto, Pageable pageable);
+    Page<MemberQueryDto> findMembers(MemberSearchDto memberSearchDto, Pageable pageable);
 }

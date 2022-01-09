@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="layout/header::header" />
+<style>
+    .field-error {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
+</style>
+<body>
+<div th:replace="layout/top::top"/>
+<div class="container" style="max-width: 560px;">
+    <form action="#" th:action="@{/boards/save}" th:object="${form}" method="post">
+        <div class="mb-3">
+            <label th:for="title">제목</label>
+            <input type="text" th:field="*{title}" placeholder="제목" class="form-control" th:errorclass="field-error">
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</p>
+        </div>
+        <div class="mb-3">
+            <label th:for="content">내용</label>
+            <input type="text" th:field="*{content}" placeholder="내용" class="form-control" th:errorclass="field-error">
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">content Error</p>
+        </div>
+        <div class="clearfix">
+            <a href="#" th:href="@{/boards}" class="btn btn-secondary float-start" role="button">목록</a>
+            <button type="submit" class="btn btn-primary float-end">등록</button>
+        </div>
+    </form>
+</div>
+<div th:replace="layout/footer::footer"/>
+</body>
+</html>

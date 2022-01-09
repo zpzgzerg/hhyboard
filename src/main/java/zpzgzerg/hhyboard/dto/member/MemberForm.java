@@ -1,12 +1,12 @@
-package zpzgzerg.hhyboard.form.member;
+package zpzgzerg.hhyboard.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 import zpzgzerg.hhyboard.entity.RoleType;
-import zpzgzerg.hhyboard.form.SaveCheck;
-import zpzgzerg.hhyboard.form.UpdateCheck;
+import zpzgzerg.hhyboard.dto.SaveCheck;
+import zpzgzerg.hhyboard.dto.UpdateCheck;
 
 import javax.validation.constraints.*;
 
@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
 public class MemberForm {
 
     @NotNull(groups = {UpdateCheck.class})
-    private long memberId;
+    private Long memberId;
 
     @NotNull(message = "권한을 선택해주세요.", groups = {SaveCheck.class, UpdateCheck.class})
     private RoleType roleType;

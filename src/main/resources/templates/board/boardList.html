@@ -4,7 +4,33 @@
 <body>
 <div th:replace="layout/top::top"/>
 <div class="container">
-    아직 개발전
+    <div>
+        <a href="#" th:href="@{/boards/save}" class="btn btn-primary float-end" role="button">등록</a>
+    </div>
+    <table class="table">
+        <thead class="text-center">
+            <tr>
+                <th>No</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록일시</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr th:each="board : ${boards}">
+                <th th:text="${board.id}">No</th>
+                <td th:text="${board.title}">제목</td>
+                <td th:text="${board.userName}">작성자</td>
+                <td th:text="${#temporals.format(board.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>
+                <td th:text="${board.readCnt}">조회수</td>
+            </tr>
+            <tr th:if="${boards.size() == 0}">
+                <td colspan="5">등록 된 게시물이 없습니다.</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav th:replace="common/paging::paging"/>
 </div>
 <div th:replace="layout/footer::footer"/>
 </body>

@@ -1,4 +1,4 @@
-package zpzgzerg.hhyboard.controller;
+package zpzgzerg.hhyboard.service.comm;
 
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,7 +30,7 @@ public class Paging {
         // 끝페이지 구하기
         int endPage = ((currentPageBlock + 1) * blockPerPage) - 1;
         if (endPage > totalPage) {
-            endPage = totalPage - 1;
+            endPage = (totalPage - 1) < 0 ? 0 : (totalPage - 1);
         }
         // 다음 버튼 페이지 구하기
         int nextPage = endPage + 1;
