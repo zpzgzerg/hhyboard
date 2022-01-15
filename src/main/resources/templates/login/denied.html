@@ -1,8 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header" />
+<head th:replace="layout/header::header(title='Denied')" />
 <body>
-<div th:replace="layout/top::top"/>
+<div th:replace="layout/top::top(cUrl='')"/>
 <div class="container" style="max-width: 560px;">
     <div class="text-center">
         <h4><span th:text="${login.loginId}" class="alert-danger" />님은 접근권한이 없습니다.</h4>

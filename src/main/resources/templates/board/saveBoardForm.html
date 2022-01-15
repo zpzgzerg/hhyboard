@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="layout/header::header" />
+<head th:replace="layout/header::header(title='Board')" />
 <style>
     .field-error {
         border-color: #dc3545;
@@ -9,7 +9,7 @@
     }
 </style>
 <body>
-<div th:replace="layout/top::top"/>
+<div th:replace="layout/top::top(cUrl='boards')"/>
 <div class="container" style="max-width: 560px;">
     <form action="#" th:action="@{/boards/save}" th:object="${form}" method="post">
         <div class="mb-3">

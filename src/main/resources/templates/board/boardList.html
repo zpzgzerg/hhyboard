@@ -1,8 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header" />
+<head th:replace="layout/header::header(title='Board')" />
 <body>
-<div th:replace="layout/top::top"/>
+<div th:replace="layout/top::top(cUrl='boards')"/>
 <div class="container">
     <div>
         <a href="#" th:href="@{/boards/save}" class="btn btn-primary float-end" role="button">등록</a>

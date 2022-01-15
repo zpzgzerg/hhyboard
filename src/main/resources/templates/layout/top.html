@@ -1,16 +1,16 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-    <div class="container" th:fragment="top">
+    <div class="container" th:fragment="top(cUrl)">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <span class="fs-4">HHY Admin</span>
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" th:href="@{/members}" class="nav-link px-2 link-dark">회원관리</a></li>
-                <li><a href="#" th:href="@{/boards}" class="nav-link px-2 link-secondary">게시판관리</a></li>
-                <li><a href="#" th:href="@{/points}" class="nav-link px-2 link-secondary">포인트관리</a></li>
-                <li><a href="#" th:href="@{/comments}" class="nav-link px-2 link-secondary">댓글관리</a></li>
+                <li><a href="#" th:href="@{/members}" th:classappend="${cUrl == 'members'} ? link-dark : link-secondary" class="nav-link px-2">회원관리</a></li>
+                <li><a href="#" th:href="@{/boards}" th:classappend="${cUrl == 'boards'} ? link-dark : link-secondary" class="nav-link px-2">게시판관리</a></li>
+                <li><a href="#" th:href="@{/points}" th:classappend="${cUrl == 'points'} ? link-dark : link-secondary" class="nav-link px-2">포인트관리</a></li>
+                <li><a href="#" th:href="@{/comments}" th:classappend="${cUrl == 'comments'} ? link-dark : link-secondary" class="nav-link px-2">댓글관리</a></li>
             </ul>
 
             <div class="col-md-3 text-end">

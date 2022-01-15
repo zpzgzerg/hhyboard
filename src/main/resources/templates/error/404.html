@@ -1,8 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header" />
+<head th:replace="layout/header::header(title='Error')" />
 <body>
-<div th:replace="layout/top::top"/>
+<div th:replace="layout/top::top(cUrl='')"/>
 <div class="container" style="max-width: 560px;">
     <div class="text-center">
         <h2>페이지를 찾을 수 없습니다</h2>

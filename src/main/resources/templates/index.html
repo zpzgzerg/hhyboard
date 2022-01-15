@@ -1,8 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header" />
+<head th:replace="layout/header::header(title='Index')" />
 <body>
-<div th:replace="layout/top::top"/>
+<div th:replace="layout/top::top(cUrl='')"/>
 <div class="container text-center fs-1" th:text="'메인화면 ' + ${data}">메인화면</div>
 <div th:replace="layout/footer::footer"/>
 </body>
