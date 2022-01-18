@@ -1,52 +1,112 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/header::header(title='Member')" />
-<body>
-<div th:replace="layout/top::top(cUrl='members')"/>
-<div class="container">
-    <form th:action="@{/members}" th:object="${search}" method="post">
-    <div class="mb-3">
-        <label class="form-label">검색모듈</label>
-        <button type="submit" class="btn btn-primary float-end">검색</button>
-        <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text">아이디</span>
-            <input type="text" class="form-control" th:field="*{userId}" placeholder="검색을 원하시면 아이디를 입력해주세요.">
-            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</p>
-            <span class="input-group-text">이름</span>
-            <input type="text" class="form-control" th:field="*{userName}" placeholder="검색을 원하시면 이름을 입력해주세요.">
-            <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
+<body class="app sidebar-mini ltr">
+    <!-- GLOBAL-LOADER -->
+    <div id="global-loader">
+        <img th:src="@{/assets/images/loader.svg}" class="loader-img" alt="Loader">
+    </div>
+    <!-- /GLOBAL-LOADER -->
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div th:replace="layout/top::top" />
+            <div th:replace="layout/sidebar::sidebar" />
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <form th:action="@{/members}" th:object="${search}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">검색모듈</label>
+                                <button type="submit" class="btn btn-primary float-end">검색</button>
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text">아이디</span>
+                                    <input type="text" class="form-control" th:field="*{userId}" placeholder="검색을 원하시면 아이디를 입력해주세요.">
+                                    <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">userId Error</p>
+                                    <span class="input-group-text">이름</span>
+                                    <input type="text" class="form-control" th:field="*{userName}" placeholder="검색을 원하시면 이름을 입력해주세요.">
+                                    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mb-3">
+                            <div class="float-start" th:text="'회원수 : ' + ${paging.totalCount} + ' 명'"></div>
+                            <a href="#" th:href="@{/members/save}" class="btn btn-primary float-end" role="button">회원등록</a>
+                        </div>
+                        <table class="table">
+                            <thead class="text-center">
+                            <tr>
+                                <th>No</th>
+                                <th>권한</th>
+                                <th>아이디</th>
+                                <th>이름</th>
+                                <th class="col-2">등록일시</th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            <tr th:each="member : ${members}">
+                                <th th:text="${member.id}">No</th>
+                                <td th:text="${member.roleType.roleName}">권한</td>
+                                <td><a href="#" th:href="@{/members/{id}/detail(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
+                                <td th:text="${member.userName}">이름</td>
+                                <td th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>
+                            </tr>
+                            <tr th:if="${members.size() == 0}">
+                                <td colspan="6">등록 된 회원이 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <nav th:replace="common/paging::paging"/>
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
         </div>
+        <div th:replace="layout/footer::footer"/>
     </div>
-    </form>
-    <div class="mb-3">
-        <div class="float-start" th:text="'회원수 : ' + ${paging.totalCount} + ' 명'"></div>
-        <a href="#" th:href="@{/members/save}" class="btn btn-primary float-end" role="button">회원등록</a>
-    </div>
-    <table class="table">
-        <thead class="text-center">
-            <tr>
-                <th>No</th>
-                <th>권한</th>
-                <th>아이디</th>
-                <th>이름</th>
-                <th class="col-2">등록일시</th>
-            </tr>
-        </thead>
-        <tbody class="text-center">
-            <tr th:each="member : ${members}">
-                <th th:text="${member.id}">No</th>
-                <td th:text="${member.roleType.roleName}">권한</td>
-                <td><a href="#" th:href="@{/members/{id}/detail(id=${member.id})}" th:text="${member.userId}">아이디</a></td>
-                <td th:text="${member.userName}">이름</td>
-                <td th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</td>
-            </tr>
-            <tr th:if="${members.size() == 0}">
-                <td colspan="6">등록 된 회원이 없습니다.</td>
-            </tr>
-        </tbody>
-    </table>
-    <nav th:replace="common/paging::paging"/>
-</div>
-<div th:replace="layout/footer::footer"/>
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    <!-- JQUERY JS -->
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script th:src="@{/assets/plugins/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- SPARKLINE JS-->
+    <script th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+
+    <!-- CHART-CIRCLE JS-->
+    <script th:src="@{/assets/js/circle-progress.min.js}"></script>
+
+    <!-- Internal Dtree Treeview js -->
+    <script th:src="@{/assets/plugins/dtree/dtree.js}"></script>
+    <script th:src="@{/assets/plugins/dtree/dtree1.js}"></script>
+
+    <!-- Internal Treeview js -->
+    <script th:src="@{/assets/plugins/treeview/treeview.js}"></script>
+
+    <!-- SIDE-MENU JS-->
+    <script th:src="@{/assets/plugins/sidemenu/sidemenu.js}"></script>
+
+    <!-- SIDEBAR JS -->
+    <script th:src="@{/assets/plugins/sidebar/sidebar.js}"></script>
+
+    <!-- Perfect SCROLLBAR JS-->
+    <script th:src="@{/assets/plugins/p-scroll/perfect-scrollbar.js}"></script>
+    <script th:src="@{/assets/plugins/p-scroll/pscroll.js}"></script>
+    <script th:src="@{/assets/plugins/p-scroll/pscroll-1.js}"></script>
+
+    <!-- Color Theme js -->
+    <script th:src="@{/assets/js/themeColors.js}"></script>
+
+    <!-- Sticky js -->
+    <script th:src="@{/assets/js/sticky.js}"></script>
+
+    <!-- CUSTOM JS -->
+    <script th:src="@{/assets/js/custom.js}"></script>
+
 </body>
 </html>
