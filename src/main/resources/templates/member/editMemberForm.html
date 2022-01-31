@@ -1,38 +1,50 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header(title='Member')" />
-<style>
-    .field-error {
-        border-color: #dc3545;
-        color: #dc3545;
-    }
-</style>
-<body>
-<div th:replace="layout/top::top(cUrl='members')"/>
-<div class="container" style="max-width: 560px;">
-    <form th:object="${form}" method="post">
-        <input type="hidden" th:field="*{memberId}">
-        <div class="mb-3">
-            <label th:for="userName">이름</label>
-            <input type="text" th:field="*{userName}" placeholder="이름" class="form-control" th:errorclass="field-error">
-            <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
+<head th:replace="layout/header::header(title='HMS - 시스템관리 > 회원관리')" />
+<body class="app sidebar-mini ltr">
+    <div th:replace="layout/loader::loader" />
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div th:replace="layout/top::top" />
+            <div th:replace="layout/sidebar::sidebar" />
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <div class="container" style="max-width: 560px;">
+                            <form th:object="${form}" method="post">
+                                <input type="hidden" th:field="*{memberId}">
+                                <div class="mb-3">
+                                    <label th:for="userName">이름</label>
+                                    <input type="text" th:field="*{userName}" placeholder="이름" class="form-control" th:errorclass="field-error">
+                                    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userNamd Error</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label th:for="roleType">권한</label>
+                                    <select th:field="*{roleType}" class="form-control" th:errorclass="field-error">
+                                        <option value="">선택</option>
+                                        <option th:each="roleType : ${T(zpzgzerg.hhyboard.entity.RoleType).values()}"
+                                                th:value="${roleType.name()}"
+                                                th:text="${roleType.roleName}">권한명</option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('roleType')}" th:errors="*{roleType}">roleType Error</p>
+                                </div>
+                                <div class="clearfix">
+                                    <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
+                                    <button type="submit" class="btn btn-primary float-end">수정</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
         </div>
-        <div class="mb-3">
-            <label th:for="roleType">권한</label>
-            <select th:field="*{roleType}" class="form-control" th:errorclass="field-error">
-                <option value="">선택</option>
-                <option th:each="roleType : ${T(zpzgzerg.hhyboard.entity.RoleType).values()}"
-                        th:value="${roleType.name()}"
-                        th:text="${roleType.roleName}">권한명</option>
-            </select>
-            <p th:if="${#fields.hasErrors('roleType')}" th:errors="*{roleType}">roleType Error</p>
-        </div>
-        <div class="clearfix">
-            <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
-            <button type="submit" class="btn btn-primary float-end">수정</button>
-        </div>
-    </form>
-</div>
-<div th:replace="layout/footer::footer"/>
+        <div th:replace="layout/footer::footer"/>
+    </div>
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </body>
 </html>

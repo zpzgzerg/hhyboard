@@ -12,7 +12,7 @@ public class Paging {
 
     private int blockPerPage;  // 한번에 보여줄 수 있는 페이지번호 수
 
-    public PagingDto process(int currPage, int totalPage, long totalCount) {
+    public PagingDto process(int currPage, int pageSize, int totalPage, long totalCount) {
 
         // 현재의 페이지 블록 번호
         int currentPageBlock = (int) Math.floor(currPage / blockPerPage);
@@ -41,7 +41,11 @@ public class Paging {
         // 다음 버튼 여부 체크
         if (nextPage > totalPage - 1) isNext = false;
 
+        // 시작 로우 - 끝 로우 구하기
+        long startRow = (currPage * pageSize) + 1;
+        long endRow = ((startRow + pageSize) -1) > totalCount ? (int) totalCount : (startRow + pageSize) -1;
+
         // DTO 생성 및 모델객체에 add
-        return new PagingDto(totalCount, currPage, startPage, endPage, prevPage, nextPage, isPrev, isNext);
+        return new PagingDto(totalCount, startRow, endRow, currPage, startPage, endPage, prevPage, nextPage, isPrev, isNext);
     }
 }

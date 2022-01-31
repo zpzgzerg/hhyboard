@@ -1,7 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <nav aria-label="Paging" th:fragment="paging">
-        <ul class="pagination justify-content-center">
+        <div class="float-start">Showing [[${paging.startRow}]] to [[${paging.endRow}]] of [[${paging.totalCount}]] entries</div>
+        <ul class="pagination justify-content-end">
             <li class="page-item" th:if="${paging.isPrev == true}">
                 <a class="page-link" href="#" th:href="@{''(page=${paging.prevPage})}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>

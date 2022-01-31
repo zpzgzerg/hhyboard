@@ -1,9 +1,27 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header(title='Index')" />
-<body>
-<div th:replace="layout/top::top(cUrl='')"/>
-<div class="container text-center fs-1" th:text="'메인화면 ' + ${data}">메인화면</div>
-<div th:replace="layout/footer::footer"/>
+<head th:replace="layout/header::header(title='HMS - 메인화면')" />
+<body class="app sidebar-mini ltr">
+    <div th:replace="layout/loader::loader" />
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div th:replace="layout/top::top" />
+            <div th:replace="layout/sidebar::sidebar" />
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <div th:text="'메인화면 ' + ${data}">메인화면</div>
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+        </div>
+        <div th:replace="layout/footer::footer"/>
+    </div>
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </body>
 </html>

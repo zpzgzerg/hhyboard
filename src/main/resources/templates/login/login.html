@@ -1,17 +1,68 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HHY 관리자 로그인</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-    <link rel="stylesheet" th:href="@{/css/login.css}" />
-</head>
-<body class="text-center">
+<head th:replace="layout/header::header(title='HMS - 로그인')" />
+<body class="app sidebar-mini ltr">
+    <!-- BACKGROUND-IMAGE -->
+    <div class="login-img">
+        <div th:replace="layout/loader::loader" />
+        <!-- PAGE -->
+        <div class="page">
+            <div class="">
+                <!-- Theme-Layout -->
+                <div class="container-login100">
+                    <div class="wrap-login100 p-6">
+                        <form th:action="@{/login}" method="post">
+                            <span class="login100-form-title pb-5">
+                                HMS - 관리자로그인
+                            </span>
+                            <div class="panel panel-primary">
+                                <div class="panel-body tabs-menu-body p-0 pt-5">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active">
+                                            <div class="wrap-input100 validate-input input-group">
+                                                <a class="input-group-text bg-white text-muted">
+                                                    <i class="fa fa-user text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input class="input100 form-control" type="text" name="userId" id="userId" placeholder="아이디" autofocus="autofocus" required="required">
+                                            </div>
+                                            <div class="wrap-input100 validate-input input-group">
+                                                <a class="input-group-text bg-white text-muted">
+                                                    <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
+                                                </a>
+                                                <input class="input100 form-control" type="password" name="password" id="password" placeholder="비밀번호" required="required">
+                                            </div>
+                                            <div th:if="${error}" th:text="${errorMessage}" class="alert alert-danger text-center" role="alert">
+                                                로그인 오류
+                                            </div>
+                                            <div class="text-end pt-4">
+                                                <p class="mb-0"><a href="forgot-password.html" class="text-primary ms-1">비밀번호를 잃어버리셨나요?</a></p>
+                                            </div>
+                                            <div class="container-login100-form-btn">
+                                                <button type="submit" class="login100-form-btn btn-primary">로그인</button>
+                                            </div>
+                                            <div class="text-center pt-3">
+                                                <p class="text-dark mb-0">아직 회원이 아니세요?<a href="register.html" class="text-primary ms-1">회원가입</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- CONTAINER CLOSED -->
+            </div>
+        </div>
+        <!-- End PAGE -->
+
+    </div>
+    <!-- BACKGROUND-IMAGE CLOSED -->
+</body>
+
+<!--<body class="text-center">
     <main class="form-signin">
-        <form th:action="@{/login_proc}" method="post">
+        <form th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 fw-normal">HHY 관리자 로그인</h1>
             <div class="form-floating">
                 <input type="text" class="form-control" name="userId" id="userId" placeholder="id" autofocus="autofocus" required="required">
@@ -21,17 +72,17 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="password" required="required">
                 <label for="password">패스워드</label>
             </div>
-            <!--div class="checkbox mb-3">
+            &lt;!&ndash;div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
-            </div>-->
-            <div th:if="${login.error}" style="margin-top: 20px; margin-bottom: 20px;">
-                <span th:text="${login.errorMessage}" style="color:red">확인해주세요</span>
+            </div>&ndash;&gt;
+            <div th:if="${error}" style="margin-top: 20px; margin-bottom: 20px;">
+                <span th:text="${errorMessage}" style="color:red">확인해주세요</span>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
             <p class="mt-5 mb-3 text-muted">2021 HHY Admin by zpzgzerg</p>
         </form>
     </main>
-</body>
+</body>-->
 </html>

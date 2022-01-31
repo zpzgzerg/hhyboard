@@ -47,7 +47,7 @@ public class MemberController {
         model.addAttribute("search", memberSearchDto);
 
         // 페이징 로직 처리
-        model.addAttribute("paging", paging.process(members.getNumber(), members.getTotalPages(), members.getTotalElements()));
+        model.addAttribute("paging", paging.process(members.getNumber(), pageable.getPageSize(), members.getTotalPages(), members.getTotalElements()));
 
         return "member/memberList";
     }

@@ -1,36 +1,52 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header(title='Member')" />
-<body>
-<div th:replace="layout/top::top(cUrl='members')"/>
-
-<div class="container" style="max-width: 560px;">
-    <div class="row mb-3">
-        <div class="col-md-2">아이디</div>
-        <div class="col-md-10" th:text="${member.userId}">아이디</div>
+<head th:replace="layout/header::header(title='HMS - 시스템관리 > 회원관리')" />
+<body class="app sidebar-mini ltr">
+    <div th:replace="layout/loader::loader" />
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div th:replace="layout/top::top" />
+            <div th:replace="layout/sidebar::sidebar" />
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <div class="container" style="max-width: 560px;">
+                            <div class="row mb-3">
+                                <div class="col-md-2">아이디</div>
+                                <div class="col-md-10" th:text="${member.userId}">아이디</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">이름</div>
+                                <div class="col-md-10" th:text="${member.userName}">이름</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">권한</div>
+                                <div class="col-md-10" th:text="${member.roleType.roleName}">권한</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">등록일시</div>
+                                <div class="col-md-10" th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2">포인트</div>
+                                <div class="col-md-10" th:text="${member.point}">포인트</div>
+                            </div>
+                            <div class="clearfix">
+                                <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
+                                <a href="#" th:href="@{/members/{id}/edit(id=${member.id})}" class="btn btn-primary float-end" role="button">수정</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+        </div>
+        <div th:replace="layout/footer::footer"/>
     </div>
-    <div class="row mb-3">
-        <div class="col-md-2">이름</div>
-        <div class="col-md-10" th:text="${member.userName}">이름</div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-2">권한</div>
-        <div class="col-md-10" th:text="${member.roleType.roleName}">권한</div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-2">등록일시</div>
-        <div class="col-md-10" th:text="${#temporals.format(member.regDt, 'yyyy-MM-dd HH:mm:ss')}">등록일시</div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-2">포인트</div>
-        <div class="col-md-10" th:text="${member.point}">포인트</div>
-    </div>
-    <div class="clearfix">
-        <a href="#" th:href="@{/members}" class="btn btn-secondary float-start" role="button">목록</a>
-        <a href="#" th:href="@{/members/{id}/edit(id=${member.id})}" class="btn btn-primary float-end" role="button">수정</a>
-    </div>
-</div>
-
-<div th:replace="layout/footer::footer"/>
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </body>
 </html>

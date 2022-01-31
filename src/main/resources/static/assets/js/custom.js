@@ -304,7 +304,7 @@ $('.off-canvas').on('click', function() {
 // $('body').addClass('sidenav-toggled');
 
 // ***** closed-leftmenu ***** //
-// $('body').addClass('closed-leftmenu');
+$('body').addClass('closed-leftmenu');
 // $('body').addClass('sidenav-toggled')
 
 // ***** hover-submenu ***** //
@@ -324,8 +324,8 @@ $('.off-canvas').on('click', function() {
 
 /******** *Header-Position Styles Start* ********/
 
-// $('body').addClass('fixed-layout');
-// $('body').addClass('scrollable-layout');
+//$('body').addClass('fixed-layout');
+$('body').addClass('scrollable-layout');
 
 
 /******* Full Width Layout Start ********/

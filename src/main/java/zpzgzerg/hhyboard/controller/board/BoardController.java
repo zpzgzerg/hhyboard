@@ -51,7 +51,7 @@ public class BoardController {
         model.addAttribute("search", boardSearchDto);
 
         // 페이징 로직처리
-        model.addAttribute("paging", paging.process(boards.getNumber(), boards.getTotalPages(), boards.getTotalElements()));
+        model.addAttribute("paging", paging.process(boards.getNumber(), pageable.getPageSize(), boards.getTotalPages(), boards.getTotalElements()));
 
         return "board/boardList";
     }

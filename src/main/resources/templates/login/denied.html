@@ -1,15 +1,35 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/header::header(title='Denied')" />
-<body>
-<div th:replace="layout/top::top(cUrl='')"/>
-<div class="container" style="max-width: 560px;">
-    <div class="text-center">
-        <h4><span th:text="${login.loginId}" class="alert-danger" />님은 접근권한이 없습니다.</h4>
-        <br/>
-        <h4 th:text="${login.errorMessage}"></h4>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="layout/header::header(title='HMS - 접근권한 불가')" />
+<body class="app sidebar-mini ltr">
+    <div th:replace="layout/loader::loader" />
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <div th:replace="layout/top::top" />
+            <div th:replace="layout/sidebar::sidebar" />
+            <!--app-content open-->
+            <div class="main-content app-content mt-0">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container container-fluid">
+                        <!-- COL END -->
+                        <div class="mt-6 col-md-12 col-xl-12">
+                            <div class="card text-danger bg-danger-transparent">
+                                <div class="card-body">
+                                    <h4 class="card-title">접근 불가</h4>
+                                    <p class="card-text"><span sec:authentication="principal.member.userName" />님은 해당 메뉴에 접근권한이 없습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CONTAINER END -->
+                </div>
+            </div>
+            <!--app-content close-->
+        </div>
+        <div th:replace="layout/footer::footer"/>
     </div>
-</div>
-<div th:replace="layout/footer::footer"/>
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 </body>
 </html>
